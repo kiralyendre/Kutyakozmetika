@@ -70,4 +70,12 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-}
+    public String getUsernameFromJWT(String token) {
+        Claims claims =
+        Jwts.parserBuilder()
+                .setSigningKey(SECRET)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.getSubject();
+}}

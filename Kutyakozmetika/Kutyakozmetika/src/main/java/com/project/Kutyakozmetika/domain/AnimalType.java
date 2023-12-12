@@ -1,5 +1,6 @@
 package com.project.Kutyakozmetika.domain;
 
+
 import lombok.Getter;
 
 @Getter
