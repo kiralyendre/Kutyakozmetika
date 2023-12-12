@@ -8,21 +8,31 @@ import {HttpClientModule} from "@angular/common/http";
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import {LoadingBarModule} from "@ngx-loading-bar/core";
+import {LoadingBarRouterModule} from "@ngx-loading-bar/router";
+import {LoadingBarHttpClientModule} from "@ngx-loading-bar/http-client";
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
-
+    FormsModule,
+    LoadingBarModule,
+    LoadingBarRouterModule,
+    LoadingBarHttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
