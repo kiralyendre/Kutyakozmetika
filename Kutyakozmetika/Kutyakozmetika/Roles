@@ -1,2 +1,5 @@
 1 ADMIN
 2 USER
+
+
+ url: jdbc:mysql://localhost:3306/Kutyakozmetika?serverTimezone=UTC&characterEncoding=utf8

@@ -27,28 +27,8 @@ public class AuthenticationController {
     private UserDetailsServiceImpl userDetailsService;
     @Autowired
     private JwtUtil jwtUtil;
-    @Autowired
-    private UserRepository userRepository;
 
-//    @PostMapping("/authenticate")
-//    public AuthenticationResponse createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse response)
-//            throws BadCredentialsException,
-//            DisabledException,
-//            UsernameNotFoundException,
-//            IOException {
-//        try {
-//
-//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword()));
-//        } catch (BadCredentialsException e) {
-//            throw new BadCredentialsException("Incorrect username or password!");
-//        } catch (DisabledException disabledException) {
-//            response.sendError(HttpServletResponse.SC_NOT_FOUND, "User is not created. Register User first.");
-//            return null;
-//        }
-//        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
-//        final String jwt = jwtUtil.generateToken(userDetails.getUsername());
-//        return new AuthenticationResponse(jwt);
-//    }
+
 @PostMapping("/authenticate")
 public AuthenticationResponse createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse response)
         throws BadCredentialsException,

@@ -1,5 +1,6 @@
 package com.project.Kutyakozmetika.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,14 +34,17 @@ public class Reservation {
     private LocalDateTime reservationDateTime;
 
     @Column
+
     private LocalDateTime startTime;
     @Column
+
     private LocalDateTime endTime;
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = ServiceType.class, fetch = FetchType.LAZY)
     @CollectionTable(name = "service_type")
     @Column(name = "service_type")
+
     private List<ServiceType> serviceTypes = new ArrayList<>();
 
 }
