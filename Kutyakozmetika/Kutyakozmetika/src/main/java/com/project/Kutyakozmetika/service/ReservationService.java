@@ -86,4 +86,32 @@ public class ReservationService {
                 .stream().map(serviceType -> serviceType.getDisplayName()).collect(Collectors.toList()));
         return reservationListItem;
     }
+
+    public List<ReservationListItem> getMyReservation(HttpServletRequest request) {
+        String username = getUsernameFromJwt(request);
+        User user = userRepository.findByUsernameOrEmail(username, username);
+        List<Reservation> result = reservationRepository.findAllByUserId(user.getId());
+        return result.stream()
+                .map(this::mapReservationToReservationListItemForUser).toList();
+
+    }
+
+    private ReservationListItem mapReservationToReservationListItemForUser(Reservation reservation) {
+        ReservationListItem reservationListItem = new ReservationListItem();
+
+        reservationListItem.setId(reservation.getId());
+        reservationListItem.setAnimalName(reservation.getAnimalName());
+        reservationListItem.setEmail(reservation.getEmail());
+        reservationListItem.setUserName(reservation.getUsername());
+        reservationListItem.setUserFirstName(reservation.getUserEntity().getFirstName());
+        reservationListItem.setUserLastName(reservation.getUserEntity().getLastName());
+        reservationListItem.setMobileNumber(reservation.getMobileNumber());
+        reservationListItem.setReservationDateTime(String.valueOf(reservation.getReservationDateTime()));
+        reservationListItem.setStartTime(String.valueOf(reservation.getStartTime()));
+        reservationListItem.setEndTime(String.valueOf(reservation.getEndTime()));
+        reservationListItem.setServiceTypes(reservation.getServiceTypes()
+                .stream().map(serviceType -> serviceType.getDisplayName()).collect(Collectors.toList()));
+        return reservationListItem;
+    }
+
 }

@@ -33,4 +33,9 @@ public class ReservationController {
         List<ReservationListItem> allReservation = reservationService.getAllReservation();
         return new ResponseEntity<>(allReservation, HttpStatus.OK);
     }
+    @GetMapping("/myReservation")
+    public ResponseEntity<List<ReservationListItem>> getMyReservation(HttpServletRequest request) {
+        log.info("Reservation list is requested");
+        return new ResponseEntity<>(reservationService.getMyReservation(request), HttpStatus.OK);
+    }
 }
