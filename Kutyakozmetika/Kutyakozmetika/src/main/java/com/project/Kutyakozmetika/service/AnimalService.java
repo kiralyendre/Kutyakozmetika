@@ -13,6 +13,8 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -26,7 +28,7 @@ public class AnimalService {
 
     public void saveAnimal(HttpServletRequest request, CreateAnimalCommand command) {
         String username = getUsernameFromJwt(request);
-        User user = userRepository.findByUsernameOrEmail(username,username);
+        User user = userRepository.findByUsernameOrEmail(username, username);
 
         if (user == null) {
             throw new RuntimeException("User not found with username: " + username);
@@ -52,5 +54,52 @@ public class AnimalService {
         String header = request.getHeader("Authorization");
         String jwtToken = header.substring(7);
         return jwtUtil.extractUsername(jwtToken);
+    }
+
+    public List<AnimalListItem> getAllAnimal() {
+        List<Animal> animalList = animalRepository.findAll();
+
+        return animalList.stream()
+                .map(AnimalService::mapEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    private static AnimalListItem mapEntityToDto(Animal animal) {
+        AnimalListItem animalListItem = new AnimalListItem();
+
+        animalListItem.setId(animal.getId());
+        animalListItem.setName(animal.getName());
+        animalListItem.setAge(animal.getAge());
+        animalListItem.setWeight(animal.getAge());
+        animalListItem.setPictureOfTheAnimal(animal.getPictureOfTheAnimal());
+        animalListItem.setBreed(animal.getBreed());
+        animalListItem.setOwnerId(animal.getOwner().getId());
+        animalListItem.setAnimalType(animal.getAnimalType().getDisplayName());
+        return animalListItem;
+    }
+
+    public List<AnimalListItem> getAnimalByUser(HttpServletRequest request) {
+        String username = getUsernameFromJwt(request);
+        User user = userRepository.findByUsernameOrEmail(username, username);
+        List<Animal> result = animalRepository.findAllByUserId(user.getId());
+        return result.stream()
+                .map(this::mapAnimalToAnimalListItemForUser).toList();
+
+    }
+
+    private AnimalListItem mapAnimalToAnimalListItemForUser(Animal animal) {
+        AnimalListItem animalListItem = new AnimalListItem();
+
+        animalListItem.setId(animal.getId());
+        animalListItem.setName(animal.getName());
+        animalListItem.setAge(animal.getAge());
+        animalListItem.setWeight(animal.getWeight());
+        animalListItem.setPictureOfTheAnimal(animal.getPictureOfTheAnimal());
+        animalListItem.setBreed(animal.getBreed());
+        animalListItem.setOwnerId(animal.getOwner().getId());
+        animalListItem.setAnimalType(animal.getAnimalType().getDisplayName());
+
+        return animalListItem;
+
     }
 }
