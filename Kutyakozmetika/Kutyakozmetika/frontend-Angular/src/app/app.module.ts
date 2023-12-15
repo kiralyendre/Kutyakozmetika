@@ -12,6 +12,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import {LoadingBarModule} from "@ngx-loading-bar/core";
 import {LoadingBarRouterModule} from "@ngx-loading-bar/router";
 import {LoadingBarHttpClientModule} from "@ngx-loading-bar/http-client";
+import { AnimalComponent } from './components/animal/animal.component';
+import { ReservationComponent } from './components/reservation/reservation.component';
 
 
 
@@ -22,7 +24,9 @@ import {LoadingBarHttpClientModule} from "@ngx-loading-bar/http-client";
     SignupComponent,
     LoginComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    AnimalComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,

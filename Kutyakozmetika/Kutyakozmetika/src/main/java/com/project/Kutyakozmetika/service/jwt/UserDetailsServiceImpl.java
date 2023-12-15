@@ -26,9 +26,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
-//        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
-//        private Collection<GrantedAuthority> mapRolesToAuthorities(List<Role> roles) {
-//            return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList()); //itt kell hozzáadni a jogosultságot
         }
 
     }
