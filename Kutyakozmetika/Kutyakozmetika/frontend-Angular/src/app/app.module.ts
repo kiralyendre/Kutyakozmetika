@@ -12,8 +12,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import {LoadingBarModule} from "@ngx-loading-bar/core";
 import {LoadingBarRouterModule} from "@ngx-loading-bar/router";
 import {LoadingBarHttpClientModule} from "@ngx-loading-bar/http-client";
-import { AnimalComponent } from './components/animal/animal.component';
-import { ReservationComponent } from './components/reservation/reservation.component';
+
+import { AnimalFormComponent } from './components/animal/animal-form/animal-form.component';
+import { AnimalListComponent } from './components/animal/animal-list/animal-list.component';
+import { MyAnimalComponent } from './components/animal/my-animal-list/my-animal.component';
+import { ReservationFormComponent } from './components/reservation/reservation-form/reservation-form.component';
+import { ReservationListComponent } from './components/reservation/reservation-list/reservation-list.component';
+import { MyReservationListComponent } from './components/reservation/my-reservation-list/my-reservation-list.component';
+import { SuccessfullReservationPageComponent } from './components/successfull-reservation-page/successfull-reservation-page.component';
 
 
 
@@ -25,8 +31,13 @@ import { ReservationComponent } from './components/reservation/reservation.compo
     LoginComponent,
     HomeComponent,
     NavbarComponent,
-    AnimalComponent,
-    ReservationComponent
+    AnimalFormComponent,
+    AnimalListComponent,
+    MyAnimalComponent,
+    ReservationFormComponent,
+    ReservationListComponent,
+    MyReservationListComponent,
+    SuccessfullReservationPageComponent
   ],
   imports: [
     BrowserModule,

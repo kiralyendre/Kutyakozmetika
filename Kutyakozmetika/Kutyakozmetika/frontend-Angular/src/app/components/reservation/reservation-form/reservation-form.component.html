@@ -1,0 +1,36 @@
+<div class="container w-75 shadow my-3 p-5 rounded" xmlns="http://www.w3.org/1999/html">
+  <h1 class="my-3">Reservation</h1>
+  <form [formGroup]="reservationForm">
+    <div class="mb-3">
+      <label
+        for="animalName"
+        class="form-label"
+      >Name:</label>
+
+      <input
+        type="text"
+        class="form-control"
+        id="animalName"
+        placeholder="Az állatka neve:"
+        formControlName="animalName"
+
+      >
+
+      <label
+        for="startTime"
+        class="form-label"
+      >Email:</label>
+
+      <input
+        type="date"
+        class="form-control"
+        id="startTime"
+        placeholder="Foglalj időpontot"
+        formControlName="startTime"
+      >
+    </div>
+
+    <button   type="button" class="btn btn-dark" (click)="saveReservation()" >Reserve</button>
+
+  </form>
+</div>
