@@ -22,12 +22,26 @@
       >Email:</label>
 
       <input
-        type="date"
+        type="datetime-local"
         class="form-control"
         id="startTime"
         placeholder="Foglalj időpontot"
         formControlName="startTime"
       >
+    </div>
+    <div class="mb-3">
+      <label for="serviceTypes"
+             class="form-label"
+      >Accommodation Type:</label>
+      <select
+        id="serviceTypes"
+        class="form-control "
+        formControlName="serviceTypes"
+      >
+
+        <option value="" selected disabled>-- Please select the type of your accommodation! --</option>
+        <option value=""></option>
+      </select>
     </div>
 
     <button   type="button" class="btn btn-dark" (click)="saveReservation()" >Reserve</button>

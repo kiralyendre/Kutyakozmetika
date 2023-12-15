@@ -20,9 +20,6 @@ export class ReservationFormComponent {
   ) {
     this.reservationForm = this.formBuilder.group({
       animalName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      username: ['', Validators.required],
-      mobileNumber: ['', Validators.required],
       startTime: ['', Validators.required],
       serviceTypes: [''],
     })
@@ -33,7 +30,7 @@ export class ReservationFormComponent {
     this.reservationService.saveReservation(data).subscribe(
       () => {
         // this.orcForm.reset(); - if we decide to stay on the page
-        this.router.navigate(['/']);
+        this.router.navigate(['/successful-reservation']);
       },
     );
   }

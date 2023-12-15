@@ -13,10 +13,15 @@ export class ReservationService {
 
   }
 
+  // saveReservation(data: ReservationCreateCommandModel) {
+  //   return this.http.post(BASE_URL, data,{
+  //         headers: this.createAuthorizationHeader()
+  //       });
+  // }
   saveReservation(data: ReservationCreateCommandModel) {
-    return this.http.post(BASE_URL, data,{
-          headers: this.createAuthorizationHeader()
-        });
+    const jwtToken = localStorage.getItem('jwt');
+    const headers = jwtToken ? new HttpHeaders().set('Authorization', 'Bearer ' + jwtToken) : null;
+    return this.http.post(BASE_URL, data, { headers });
   }
 
   private createAuthorizationHeader() {
