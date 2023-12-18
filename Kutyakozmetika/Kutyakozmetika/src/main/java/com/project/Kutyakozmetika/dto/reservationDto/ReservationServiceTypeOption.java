@@ -6,8 +6,10 @@ import lombok.Data;
 @Data
 public class ReservationServiceTypeOption {
     private String name;
+    private String displayName;
 
     public ReservationServiceTypeOption(ServiceType serviceType) {
         this.name = serviceType.name();
+        this.displayName = serviceType.getDisplayName();
     }
 }

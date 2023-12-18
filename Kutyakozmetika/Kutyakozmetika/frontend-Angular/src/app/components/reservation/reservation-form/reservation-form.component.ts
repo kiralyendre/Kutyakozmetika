@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ReservationService} from "../../../services/reservation.service";
-import {ReservationCreateCommandModel} from "../../../models/reservation/reservation-create-command.model";
+import {ServiceTypeOptionModel} from "../../../models/reservation/service-type-option.model";
+import {FormInitDataModel} from "../../../models/reservation/form-init-data.model";
 
 
 @Component({
@@ -10,8 +11,9 @@ import {ReservationCreateCommandModel} from "../../../models/reservation/reserva
   templateUrl: './reservation-form.component.html',
   styleUrls: ['./reservation-form.component.css']
 })
-export class ReservationFormComponent {
+export class ReservationFormComponent implements OnInit {
   reservationForm!: FormGroup;
+  serviceTypeOptions!: ServiceTypeOptionModel[];
 
 
   constructor(private formBuilder: FormBuilder,
@@ -21,11 +23,18 @@ export class ReservationFormComponent {
     this.reservationForm = this.formBuilder.group({
       animalName: ['', Validators.required],
       startTime: ['', Validators.required],
-      serviceTypes: [''],
+      serviceTypes: this.formBuilder.array([], Validators.required),
     })
   }
 
-  saveReservation(){
+  ngOnInit(): void {
+    this.reservationService.getInitialFormData().subscribe((formInitData: FormInitDataModel) => {
+      this.serviceTypeOptions = formInitData.services;
+      this.createCheckboxControls(this.serviceTypeOptions, this.reservationForm.controls["serviceTypes"] as FormArray);
+    })
+  }
+
+  saveReservation() {
     let data = this.reservationForm.value
     this.reservationService.saveReservation(data).subscribe(
       () => {
@@ -33,5 +42,12 @@ export class ReservationFormComponent {
         this.router.navigate(['/successful-reservation']);
       },
     );
+  }
+
+  private createCheckboxControls(options: ServiceTypeOptionModel[], formArray: FormArray) {
+    options.forEach(() => {
+      const control = this.formBuilder.control(false);
+      formArray.push(control);
+    });
   }
 }

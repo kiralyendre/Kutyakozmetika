@@ -29,20 +29,18 @@
         formControlName="startTime"
       >
     </div>
-    <div class="mb-3">
-      <label for="serviceTypes"
-             class="form-label"
-      >Accommodation Type:</label>
-      <select
-        id="serviceTypes"
-        class="form-control "
-        formControlName="serviceTypes"
+      <label
+        class="form-control-label"
       >
-
-        <option value="" selected disabled>-- Please select the type of your accommodation! --</option>
-        <option value=""></option>
-      </select>
-    </div>
+        Szolgáltatások:
+      </label>
+      <div formArrayName="serviceTypes" *ngFor="let service of serviceTypeOptions; let i = index">
+        <label>
+          <input type="checkbox" [formControlName]="i">
+          {{ service.name }}
+        </label>
+      </div>
+    <br>
 
     <button   type="button" class="btn btn-dark" (click)="saveReservation()" >Reserve</button>
 

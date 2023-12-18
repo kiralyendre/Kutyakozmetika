@@ -2,6 +2,7 @@ package com.project.Kutyakozmetika.controller;
 
 import com.project.Kutyakozmetika.domain.ServiceType;
 import com.project.Kutyakozmetika.dto.reservationDto.ReservationCreateCommand;
+import com.project.Kutyakozmetika.dto.reservationDto.ReservationFormData;
 import com.project.Kutyakozmetika.dto.reservationDto.ReservationListItem;
 import com.project.Kutyakozmetika.dto.reservationDto.ReservationServiceTypeOption;
 import com.project.Kutyakozmetika.service.ReservationService;
@@ -42,14 +43,18 @@ public class ReservationController {
         log.info("Reservation list is requested");
         return new ResponseEntity<>(reservationService.getMyReservation(request), HttpStatus.OK);
     }
-
     @GetMapping("/serviceTypes")
-    public ResponseEntity<List<ReservationServiceTypeOption>> getServiceTypeData() {
+    public ResponseEntity<ReservationFormData> getReservationFormData() {
+        ReservationFormData formData= new ReservationFormData(getServiceTypeOptions());
+        log.info("Service type requested");
+        return new ResponseEntity<>(formData, HttpStatus.OK);
+    }
+
+    private List<ReservationServiceTypeOption> getServiceTypeOptions() {
         List<ReservationServiceTypeOption> reservationServiceTypeOptions = new ArrayList<>();
         for (ServiceType st : ServiceType.values()) {
             reservationServiceTypeOptions.add(new ReservationServiceTypeOption(st));
         }
-        log.info("Service type requested");
-        return new ResponseEntity<>(reservationServiceTypeOptions, HttpStatus.OK);
+        return reservationServiceTypeOptions;
     }
 }
