@@ -23,10 +23,13 @@ export class ReservationService {
   saveReservation(data: ReservationCreateCommandModel) {
     const jwtToken = localStorage.getItem('jwt');
     const headers = jwtToken ? new HttpHeaders().set('Authorization', 'Bearer ' + jwtToken) : null;
-    return this.http.post(BASE_URL, data, { headers });
+    return this.http.post(BASE_URL, data, {headers});
   }
-  getInitialFormData():Observable<FormInitDataModel>{
-    return this.http.get<FormInitDataModel>(BASE_URL+'/serviceTypes')
+
+  getInitialFormData(): Observable<FormInitDataModel> {
+    return this.http.get<FormInitDataModel>(BASE_URL + '/serviceTypes',{
+      headers:this.createAuthorizationHeader()
+    });
   }
 
   private createAuthorizationHeader() {

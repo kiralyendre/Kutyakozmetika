@@ -43,9 +43,10 @@ public class ReservationController {
         log.info("Reservation list is requested");
         return new ResponseEntity<>(reservationService.getMyReservation(request), HttpStatus.OK);
     }
+
     @GetMapping("/serviceTypes")
     public ResponseEntity<ReservationFormData> getReservationFormData() {
-        ReservationFormData formData= new ReservationFormData(getServiceTypeOptions());
+        ReservationFormData formData = new ReservationFormData(getServiceTypeOptions());
         log.info("Service type requested");
         return new ResponseEntity<>(formData, HttpStatus.OK);
     }
