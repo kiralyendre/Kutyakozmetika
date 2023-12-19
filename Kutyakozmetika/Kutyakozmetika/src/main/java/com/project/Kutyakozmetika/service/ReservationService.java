@@ -1,6 +1,5 @@
 package com.project.Kutyakozmetika.service;
 
-import com.project.Kutyakozmetika.domain.Animal;
 import com.project.Kutyakozmetika.domain.Reservation;
 import com.project.Kutyakozmetika.domain.ServiceType;
 import com.project.Kutyakozmetika.domain.User;
@@ -15,7 +14,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -76,8 +74,8 @@ public class ReservationService {
         reservationListItem.setAnimalName(reservation.getAnimalName());
         reservationListItem.setEmail(reservation.getEmail());
         reservationListItem.setUserName(reservation.getUsername());
-        reservationListItem.setUserFirstName(reservation.getUserEntity().getFirstName());
-        reservationListItem.setUserLastName(reservation.getUserEntity().getLastName());
+        reservationListItem.setFirstName(reservation.getUserEntity().getFirstName());
+        reservationListItem.setLastName(reservation.getUserEntity().getLastName());
         reservationListItem.setMobileNumber(reservation.getMobileNumber());
         reservationListItem.setReservationDateTime(String.valueOf(reservation.getReservationDateTime()));
         reservationListItem.setStartTime(String.valueOf(reservation.getStartTime()));
@@ -103,8 +101,8 @@ public class ReservationService {
         reservationListItem.setAnimalName(reservation.getAnimalName());
         reservationListItem.setEmail(reservation.getEmail());
         reservationListItem.setUserName(reservation.getUsername());
-        reservationListItem.setUserFirstName(reservation.getUserEntity().getFirstName());
-        reservationListItem.setUserLastName(reservation.getUserEntity().getLastName());
+        reservationListItem.setFirstName(reservation.getUserEntity().getFirstName());
+        reservationListItem.setLastName(reservation.getUserEntity().getLastName());
         reservationListItem.setMobileNumber(reservation.getMobileNumber());
         reservationListItem.setReservationDateTime(String.valueOf(reservation.getReservationDateTime()));
         reservationListItem.setStartTime(String.valueOf(reservation.getStartTime()));

@@ -4,6 +4,7 @@ import {ReservationCreateCommandModel} from "../models/reservation/reservation-c
 import {Observable} from "rxjs";
 import {FormInitDataModel} from "../models/reservation/form-init-data.model";
 import {ServiceTypeOptionModel} from "../models/reservation/service-type-option.model";
+import {ReservationListItemModel} from "../models/reservation/reservation-list-item.model";
 
 const BASE_URL = 'http://localhost:8080/api/reservations'
 
@@ -15,6 +16,7 @@ export class ReservationService {
   constructor(private http: HttpClient) {
 
   }
+
   saveReservation(data: ReservationCreateCommandModel) {
     const jwtToken = localStorage.getItem('jwt');
     const headers = jwtToken ? new HttpHeaders().set('Authorization', 'Bearer ' + jwtToken) : null;
@@ -22,9 +24,15 @@ export class ReservationService {
   }
 
   getInitialFormData(): Observable<ServiceTypeOptionModel[]> {
-    return this.http.get<ServiceTypeOptionModel[]>(BASE_URL + '/serviceTypes',{
-      headers:this.createAuthorizationHeader()
+    return this.http.get<ServiceTypeOptionModel[]>(BASE_URL + '/serviceTypes', {
+      headers: this.createAuthorizationHeader()
     });
+  }
+
+  getMyReservation(): Observable<ReservationListItemModel[]> {
+    return this.http.get<ReservationListItemModel[]>(BASE_URL + '/myReservation', {
+      headers: this.createAuthorizationHeader()
+    })
   }
 
   private createAuthorizationHeader() {

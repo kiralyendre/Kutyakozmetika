@@ -3,9 +3,6 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 import {Router} from "@angular/router";
 import {ReservationService} from "../../../services/reservation.service";
 import {ServiceTypeOptionModel} from "../../../models/reservation/service-type-option.model";
-import {FormInitDataModel} from "../../../models/reservation/form-init-data.model";
-import {error} from "@angular/compiler-cli/src/transformers/util";
-
 
 @Component({
   selector: 'app-reservation-form',

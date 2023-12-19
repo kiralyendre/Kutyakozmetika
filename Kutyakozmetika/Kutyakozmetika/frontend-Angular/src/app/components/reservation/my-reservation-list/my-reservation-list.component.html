@@ -1,1 +1,41 @@
-<p>my-reservation-list works!</p>
+<div class="container w-75 shadow my-3 p-5 rounded" *ngIf="myReservations">
+  <h1 class="text-center mb-3">Foglalások:</h1>
+  <table class="table text-center table-hover table-striped">
+    <thead>
+    <tr class="table-success">
+
+      <th scope="col">Foglalás id:</th>
+      <th scope="col">Állat neve:</th>
+      <th scope="col">Email:</th>
+      <th scope="col">Felhasználónév:</th>
+      <th scope="col">Keresztnév:</th>
+      <th scope="col">Vezetéknév:</th>
+      <th scope="col">Telefonszám:</th>
+      <th scope="col">Foglalás időpontja:</th>
+      <th scope="col">Foglalás kezdete:</th>
+      <th scope="col">Foglalás vége:</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let reservation of myReservations"  >
+
+      <td>{{reservation.id}}</td>
+      <td>{{reservation.animalName}}</td>
+      <td>{{reservation.email}}</td>
+      <td>{{reservation.userName}}</td>
+      <td>{{reservation.firstName}}</td>
+      <td>{{reservation.lastName}}</td>
+      <td>{{reservation.mobileNumber}}</td>
+      <td>{{ reservation.reservationDateTime | date:'yyyy-MM-dd HH:mm' }}</td>
+      <td>{{reservation.startTime | date:'yyyy-MM-dd HH:mm'}}</td>
+      <td>{{reservation.endTime | date:'yyyy-MM-dd HH:mm'}}</td>
+      <td>
+        <div class="btn-group">
+
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
