@@ -26,7 +26,7 @@ public class ReservationService {
     private UserRepository userRepository;
     private JwtUtil jwtUtil;
 
-    public void saveReservation(HttpServletRequest request, ReservationCreateCommand command) {
+        public void saveReservation(HttpServletRequest request, ReservationCreateCommand command) {
         String username = getUsernameFromJwt(request);
         User user = userRepository.findByUsernameOrEmail(username, username);
 
@@ -37,6 +37,34 @@ public class ReservationService {
         Reservation reservation = mapDtoToEntity(user, command);
         reservationRepository.save(reservation);
     }
+//    public void saveReservation(HttpServletRequest request, ReservationCreateCommand command) {
+//        String username = getUsernameFromJwt(request);
+//        User user = userRepository.findByUsernameOrEmail(username, username);
+//
+//        if (user == null) {
+//            throw new RuntimeException("A felhasználó nem található ezzel a felhasználónévvel: " + username);
+//        }
+//        LocalDateTime startRes = LocalDateTime.parse(command.getStartTime());
+//        LocalDateTime endRes = LocalDateTime.parse(command.getStartTime()).plus(75, ChronoUnit.MINUTES);
+//
+//        if (!availableReservation(startRes, endRes)) {
+//            throw new RuntimeException("A kiválasztott időpont nem elérhető!");
+//        }
+//
+//        Reservation reservation = mapDtoToEntity(user, command);
+//        reservationRepository.save(reservation);
+//    }
+//
+//    private boolean availableReservation(LocalDateTime startRes, LocalDateTime endRes) {
+//
+//        List<Reservation> availableReservation = reservationRepository.findByReservationDateTimeBetween(startRes, endRes);
+//
+//        if (!availableReservation.isEmpty()) {
+//            return false;
+//        }
+//
+//        return true;
+//    }
 
     private Reservation mapDtoToEntity(User user, ReservationCreateCommand command) {
         Reservation reservation = new Reservation();

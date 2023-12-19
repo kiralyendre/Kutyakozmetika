@@ -2,7 +2,6 @@ package com.project.Kutyakozmetika.controller;
 
 import com.project.Kutyakozmetika.domain.ServiceType;
 import com.project.Kutyakozmetika.dto.reservationDto.ReservationCreateCommand;
-import com.project.Kutyakozmetika.dto.reservationDto.ReservationFormData;
 import com.project.Kutyakozmetika.dto.reservationDto.ReservationListItem;
 import com.project.Kutyakozmetika.dto.reservationDto.ReservationServiceTypeOption;
 import com.project.Kutyakozmetika.service.ReservationService;
