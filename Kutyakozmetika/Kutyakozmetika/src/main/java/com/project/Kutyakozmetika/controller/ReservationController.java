@@ -45,17 +45,12 @@ public class ReservationController {
     }
 
     @GetMapping("/serviceTypes")
-    public ResponseEntity<ReservationFormData> getReservationFormData() {
-        ReservationFormData formData = new ReservationFormData(getServiceTypeOptions());
-        log.info("Service type requested");
-        return new ResponseEntity<>(formData, HttpStatus.OK);
-    }
-
-    private List<ReservationServiceTypeOption> getServiceTypeOptions() {
+    public ResponseEntity<List<ReservationServiceTypeOption>> getReservationFormData() {
         List<ReservationServiceTypeOption> reservationServiceTypeOptions = new ArrayList<>();
         for (ServiceType st : ServiceType.values()) {
             reservationServiceTypeOptions.add(new ReservationServiceTypeOption(st));
         }
-        return reservationServiceTypeOptions;
+        log.info("Service type requested");
+        return new ResponseEntity<>(reservationServiceTypeOptions, HttpStatus.OK);
     }
 }

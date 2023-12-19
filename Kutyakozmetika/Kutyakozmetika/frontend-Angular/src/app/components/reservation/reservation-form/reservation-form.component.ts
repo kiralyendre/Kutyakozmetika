@@ -28,33 +28,22 @@ export class ReservationFormComponent implements OnInit {
     })
   }
 
-  // ngOnInit(): void {
-  //   this.reservationService.getInitialFormData().subscribe({
-  //     next: data =>{
-  //       this.serviceTypeOptions = data.services;
-  //       console.log(data);
-  //       this.createCheckboxControls(this.serviceTypeOptions, this.reservationForm.controls["serviceTypes"] as FormArray)
-  //     },
-  //     error: err => console.error(err),
-  //   })
-  // }
+
   ngOnInit(): void {
     this.reservationService.getInitialFormData().subscribe({
-      next: async (data) => {
-        try {
-          if (data && data.services) {
-            this.serviceTypeOptions = data.services;
-            console.log(this.serviceTypeOptions);
-          } else {
-            throw new Error('Data or data.services is undefined.');
-          }
-        } catch (error) {
-          console.error('Error handling:', error);
+        next: data => {
+          this.serviceTypeOptions = data;
+          console.log(data)
+          this.createCheckboxControls(this.serviceTypeOptions, this.reservationForm.controls["serviceTypes"] as FormArray);
         }
       },
-      error: (error) => {
-        console.error('Error fetching initial form data:', error);
-      }
+    )
+  }
+
+  private createCheckboxControls(options: Array<any>, controlName: FormArray) {
+    options.forEach(() => {
+      const control = new FormControl(false);
+      (controlName).push(control);
     });
   }
 
@@ -65,20 +54,5 @@ export class ReservationFormComponent implements OnInit {
         this.router.navigate(['/successful-reservation']);
       },
     );
-  }
-
-  // private createCheckboxControls(options: ServiceTypeOptionModel[], formArray: FormArray) {
-  //   options.forEach(option => {
-  //     const control = this.formBuilder.control(false);
-  //     formArray.push(control);
-  //   });
-  // }
-
-  private createCheckboxControls() {
-    const serviceTypesFormArray = this.reservationForm.get('serviceTypes') as FormArray;
-    this.serviceTypeOptions.forEach(() => {
-      const control = new FormControl(false);
-      serviceTypesFormArray.push(control);
-    });
   }
 }

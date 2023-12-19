@@ -35,9 +35,9 @@
         Szolgáltatások:
       </label>
     <div formArrayName="serviceTypes" *ngFor="let service of serviceTypeOptions; let i = index">
-      <label>
+    <label>
         <input type="checkbox" [formControlName]="i" >
-        {{ service.name }}
+        {{ service.displayName }}
       </label>
     </div>
     <br>
