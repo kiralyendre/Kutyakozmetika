@@ -35,6 +35,12 @@ export class ReservationService {
     })
   }
 
+  getAllReservations(): Observable<ReservationListItemModel[]> {
+    return this.http.get<ReservationListItemModel[]>(BASE_URL , {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
   private createAuthorizationHeader() {
     const jwtToken = localStorage.getItem('jwt');
     if (jwtToken) {
