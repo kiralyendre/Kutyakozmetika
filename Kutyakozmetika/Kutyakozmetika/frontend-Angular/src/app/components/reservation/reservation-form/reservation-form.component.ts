@@ -40,19 +40,25 @@ export class ReservationFormComponent implements OnInit {
     )
   }
 
+  saveReservation() {
+    let data = this.reservationForm.value
+    console.log(data);
+    data.serviceTypes =this.createServiceTypeArrayToSend();
+    this.reservationService.saveReservation(data).subscribe(
+      () => {
+        this.router.navigate(['/successful-reservation']);
+      },
+    );
+  }
   private createCheckboxControls(options: Array<any>, controlName: FormArray) {
     options.forEach(() => {
       const control = new FormControl(false);
       (controlName).push(control);
     });
   }
-
-  saveReservation() {
-    let data = this.reservationForm.value
-    this.reservationService.saveReservation(data).subscribe(
-      () => {
-        this.router.navigate(['/successful-reservation']);
-      },
-    );
+  private createServiceTypeArrayToSend(): string[] {
+    return this.reservationForm.value.serviceTypes.map((type: string, index: number) =>
+      type ? this.serviceTypeOptions[index].name : null)
+      .filter((type: string) => type != null);
   }
 }
